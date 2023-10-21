@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mosbach Task Organizer</title>
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+
+<h1>Mosbach Task Organizer</h1>
+
+<p/>
+Here you can sign into your account:<br/><br/>
+
+<label>Email</label>
+<div><input id="userEmail" type="text" maxlength="255" value=""/></div>
+
+<label>Password</label>
+<div><input id="userPassword" type="text" maxlength="255" value=""/></div>
+
+<br/>
+
+<button id="usersubmit">Sign in.</button>
+
+<script>
+    $("#usersubmit").click(function() {
+        var user = {
+                email: $("#userEmail").val(),
+                password: $("#userPassword").val()
+        };
+        console.log(user);
+        $.ajax({
+            url: 'https://secret-plains-43943-9f16411ee064.herokuapp.com/api/v1.0/auth/login',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                localStorage.setItem('mosbachtoken',data.token);
+            },
+            data: JSON.stringify(user),
+            processData: false,
+            contentType: "application/json; charset=UTF-8",
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Error: ' + xhr.status + '   ' + thrownError);
+              }
+        });
+    });
+</script>
+
+
+
+<br/><br/>
+
+<a href="../Homepage.html">back home</a>
+
+
+</body>
+</html>

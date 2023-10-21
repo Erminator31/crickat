@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mosbach Task Organizer</title>
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+
+<h1>Mosbach Task Organizer</h1>
+
+<p/>
+You have to do the following tasks:<br/><br/>
+
+<ul id="tasklist"></ul>
+<script>
+(function() {
+    $.ajax({
+                url: 'https://secret-plains-43943-9f16411ee064.herokuapp.com/api/v1.0/tasks/all?token=123&sortOrder=date',
+                type: 'get',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    tempString = '';
+                    $.each(data.tasks, function(index, value) {
+                        tempString += '<li>Task Nr.: ' + index + ' : ' + value.name +  ' prio: '
+                                    + value.priority + '</li>';
+                    })
+                    $("#tasklist").html(tempString);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                alert('Error: ' + xhr.status + '   ' + thrownError);
+            }
+        });
+})()
+</script>
+
+
+<br/><br/>
+
+<a href="../Homepage.html">back home</a>
+
+
+</body>
+</html>

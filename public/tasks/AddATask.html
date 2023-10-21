@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mosbach Task Organizer</title>
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+
+<h1>Mosbach Task Organizer</h1>
+
+<p/>
+You can add a task:<br/><br/>
+
+<label>Name</label>
+<div><input id="taskname" type="text" maxlength="255" value=""/></div>
+
+<label>Priority</label>
+<div><input id="taskpriority" type="text" maxlength="255" value=""/></div>
+
+<br/>
+
+<button id="tasksubmit">Submit</button>
+
+
+<script>
+    $("#tasksubmit").click(function() {
+        var tokentask = {
+                token: localStorage.getItem('mosbachtoken'),
+                task: {
+                    name: $("#taskname").val(),
+                    priority:parseInt($("#taskpriority").val())
+                }
+        };
+        console.log(tokentask);
+        $.ajax({
+            url: 'https://secret-plains-43943-9f16411ee064.herokuapp.com/api/v1.0/tasks',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                alert("Success.");
+            },
+            data: JSON.stringify(tokentask),
+            processData: false,
+            contentType: "application/json; charset=UTF-8",
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Error: ' + xhr.status + '   ' + thrownError);
+              }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+<br/><br/>
+
+<a href="../Homepage.html">back home</a>
+
+
+</body>
+</html>
