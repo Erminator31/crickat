@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'crickat';
+
+  buttonClicked() {
+    alert('Hallo, wie geht es dir?');
+  }
 }
