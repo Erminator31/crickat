@@ -1,0 +1,11 @@
+header {
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.logo {
+    height: 50px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    margin-left: 80px;
+}
