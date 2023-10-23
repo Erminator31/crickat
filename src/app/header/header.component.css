@@ -1,0 +1,27 @@
+header {
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+a {
+    color: black;
+    margin-right: 40px;
+}
+
+.logo {
+    height: 50px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    margin-left: 80px;
+}
+
+.spacer {
+    flex: 1;
+}
