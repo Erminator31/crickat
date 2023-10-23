@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,10 @@ export class AuthService {
 
   GetUserrole(){
     return sessionStorage.getItem('userrole')!=null?sessionStorage.getItem('userrole')?.toString():'';
+  }
+
+  Deleteuser(userId: string) {
+    return this.http.delete(`${this.apiurl}/${userId}`);
   }
 
 }

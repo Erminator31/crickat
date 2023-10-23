@@ -33,8 +33,8 @@ export class UserlistingComponent {
   displayedColumns: string[] = ['username', 'name', 'email', 'role', 'status', 'action'];
   UpdateUser(code:any){
     const popup=this.dialog.open(UpdatepopupComponent,{
-      enterAnimationDuration:'1000ms',
-      exitAnimationDuration:'500ms',
+      enterAnimationDuration:'400ms',
+      exitAnimationDuration:'400ms',
       width:'50%',
       data:{
         usercode:code

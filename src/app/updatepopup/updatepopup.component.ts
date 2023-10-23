@@ -9,31 +9,33 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './updatepopup.component.html',
   styleUrls: ['./updatepopup.component.css']
 })
-export class UpdatepopupComponent implements OnInit{
+export class UpdatepopupComponent implements OnInit {
 
-  constructor(private builder:FormBuilder, private service:AuthService,
-    @Inject(MAT_DIALOG_DATA) public data:any, private toastr:ToastrService,
-    private dialog:MatDialogRef<UpdatepopupComponent>){
+  constructor(private builder: FormBuilder, private service: AuthService,
+    @Inject(MAT_DIALOG_DATA) public data: any, private toastr: ToastrService,
+    private dialog: MatDialogRef<UpdatepopupComponent>) {
 
   }
 
-  editdata:any;
+  editdata: any;
 
   ngOnInit(): void {
-    this.service.GetAllRole().subscribe(res=>{
-      this.rolelist=res;
+    this.service.GetAllRole().subscribe(res => {
+      this.rolelist = res;
     })
-    if(this.data.usercode!=null && this.data.usercode!=''){
-      this.service.Getbycode(this.data.usercode).subscribe(res=>{
-        this.editdata=res;
-        this.registerform.setValue({id: this.editdata.id, name: this.editdata.name,
+    if (this.data.usercode != null && this.data.usercode != '') {
+      this.service.Getbycode(this.data.usercode).subscribe(res => {
+        this.editdata = res;
+        this.registerform.setValue({
+          id: this.editdata.id, name: this.editdata.name,
           password: this.editdata.password, email: this.editdata.email, gender: this.editdata.gender,
-          role: this.editdata.role, isactive: this.editdata.isactive})
+          role: this.editdata.role, isactive: this.editdata.isactive
+        })
       });
     }
   }
 
-  rolelist:any;
+  rolelist: any;
 
   registerform = this.builder.group({
     id: this.builder.control(''),
@@ -46,13 +48,29 @@ export class UpdatepopupComponent implements OnInit{
   });
 
   updateuser() {
-    if(this.registerform.valid){
-      this.service.Updateuser(this.registerform.value.id,this.registerform.value).subscribe(res=>{
+    if (this.registerform.valid) {
+      this.service.Updateuser(this.registerform.value.id, this.registerform.value).subscribe(res => {
         this.toastr.success('Updated succefully');
         this.dialog.close();
       });
-    } else{
+    } else {
       this.toastr.warning('Please Select Role');
+    }
+  }
+
+  deleteuser() {
+    const userId = this.registerform.value.id; // Die ID des zu löschenden Benutzers
+    console.log(userId);
+
+    if (userId) {
+      this.service.Deleteuser(userId).subscribe(res => {
+        this.toastr.success('Benutzer erfolgreich gelöscht');
+        this.dialog.close();
+      }, error => {
+        this.toastr.error('Fehler beim Löschen des Benutzers');
+      });
+    } else {
+      this.toastr.warning('Bitte wählen Sie einen Benutzer zum Löschen aus');
     }
   }
 
