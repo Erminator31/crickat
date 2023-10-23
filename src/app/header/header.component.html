@@ -1,3 +1,6 @@
-<header>
-    <img class="logo" src="assets/logo.png">
+<header *ngIf="ismenurerequired">
+    <a routerLink="/"><img class="logo" src="assets/logo.png"></a>
+    <div class="spacer"></div>
+    <a *ngIf="isadminuser" routerLink="/user">User List</a>
+    <a routerLink="/login">Logout</a>
 </header>
