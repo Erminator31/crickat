@@ -1,0 +1,37 @@
+
+### Test Get auf /auth
+
+GET https://secret-plains-43943-9f16411ee064.herokuapp.com/api/v1.0/auth?name=Michael
+
+### Sign in user
+
+POST https://secret-plains-43943-9f16411ee064.herokuapp.com/api/v1.0/auth/login
+Content-Type: application/json
+
+{
+  "userEmail":"timeATme.com",
+  "userPassword": "Nobody knows but me."
+}
+
+
+### Test Get all /tasks
+
+GET https://secret-plains-43943-9f16411ee064.herokuapp.com/api/v1.0/tasks/all?token=123&sortOrder=date
+
+### Test Add a /tasks
+
+POST https://secret-plains-43943-9f16411ee064.herokuapp.com/api/v1.0/tasks
+Content-Type: application/json
+
+{
+  "token":"123",
+  "task": {
+    "name": "clean the kitchen",
+    "priority": 4
+   }
+}
+
+### Create a table for tasks
+
+GET https://secret-plains-43943-9f16411ee064.herokuapp.com/api/v1.0/create-task-table
+
